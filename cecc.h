@@ -21,3 +21,26 @@ typedef struct EccPoint {
     uint8_t x[NUM_ECC_DIGITS];
     uint8_t y[NUM_ECC_DIGITS];
 } EccPoint;
+
+/*
+  ecc_gen_keys()
+  generate public/private key pair
+  - use a new cryptographycaly secure random number
+
+  - inputs:
+      p_random - the random number to use to generate the keypair
+
+  - outputs:
+      p_pubkey - will be filled in with the point representing the public key.
+      p_privkey - will be filled in with the private key.
+ */
+int ecc_gen_keys(EccPoint *p_pubkey, uint8_t p_privkey[NUM_ECC_DIGITS], uint8_t p_random[NUM_ECC_DIGITS]);
+
+/*
+  ecc_is_valid_pubkey
+  determine whether or not a given point is on the chosen elliptic curve
+
+  - inputs:
+      p_pubkey - the poin to check.
+ */
+int ecc_is_valid_pubkey(EccPoint *p_pubkey);
