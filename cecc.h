@@ -44,3 +44,19 @@ int ecc_gen_keys(EccPoint *p_pubkey, uint8_t p_privkey[NUM_ECC_DIGITS], uint8_t 
       p_pubkey - the poin to check.
  */
 int ecc_is_valid_pubkey(EccPoint *p_pubkey);
+
+/*
+  ecdh_shared_secret()
+  compute a shared secret given your secret key and someone else's public key.
+
+  - inputs:
+      p_pubkey - the public key of the remote party.
+      p_privkey - your private key.
+      p_random - an optional random number to resist DPA attacks. pass in NULL if DPA attacks are not a concern.
+
+  - outputs:
+      p_secret - will be filled in with the shared secret value.
+
+  Note: It is recommended that you hash the result of ecdh_shared_secret before using it for symmetric encryption or HMAC. If you do not hash the shared secret, you must call ecc_valid_public_key() to verify that the remote side's public key is valid. If this is not done, an attacker could create a public key that would cause your use of the shared secret to leak information about your private key.
+ */
+int ecdh_sared_secret(uint8_t p_secret[NUM_ECC_DIGITS], EccPoint *p_pubkey, uint8_t p_privkey[NUM_ECC_DIGITS], uint8_t p_random[NUM_ECC_DIGITS]);

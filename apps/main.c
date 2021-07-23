@@ -16,8 +16,8 @@ void vli_print(uint8_t *p_vli) {
     printf("0x%02X", (unsigned)p_vli[i]);
 }
 
-void getRandomBytes(void *p_dest, unsigned p_size) {
-    if (read(randfd, p_dest, p_size) != (int)p_size) {
+void getRandomBytes(void *p_dest, unsigned int p_size) {
+    if (read(randfd, p_dest, p_size) != p_size) {
         printf("Failed to get random bytes.\n");
     }
 }
@@ -39,6 +39,7 @@ int main(int argc, char **argv) {
     uint8_t l_private[NUM_ECC_DIGITS];
 
     for (i = 0; i < l_num; ++i) {
+        getRandomBytes((char *)l_private, NUM_ECC_DIGITS * sizeof(uint8_t));
         printf("uint8_t private_%u[NUM_ECC_DIGITS] = {", i);
         vli_print(l_private);
         printf("};\n");
