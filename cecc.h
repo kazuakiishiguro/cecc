@@ -59,4 +59,4 @@ int ecc_is_valid_pubkey(EccPoint *p_pubkey);
 
   Note: It is recommended that you hash the result of ecdh_shared_secret before using it for symmetric encryption or HMAC. If you do not hash the shared secret, you must call ecc_valid_public_key() to verify that the remote side's public key is valid. If this is not done, an attacker could create a public key that would cause your use of the shared secret to leak information about your private key.
  */
-int ecdh_sared_secret(uint8_t p_secret[NUM_ECC_DIGITS], EccPoint *p_pubkey, uint8_t p_privkey[NUM_ECC_DIGITS], uint8_t p_random[NUM_ECC_DIGITS]);
+int ecdh_shared_secret(uint8_t p_secret[NUM_ECC_DIGITS], EccPoint *p_pubkey, uint8_t p_privkey[NUM_ECC_DIGITS], uint8_t p_random[NUM_ECC_DIGITS]);
